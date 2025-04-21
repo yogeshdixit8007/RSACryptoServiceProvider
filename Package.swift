@@ -1,34 +1,21 @@
-// swift-tools-version:5.3
+// swift-tools-version:5.9
 import PackageDescription
 
 let package = Package(
-    name: "MyRSAApp",
+    name: "RSACryptoServiceProvider",
+    platforms: [.macOS(.v10_15)],
     products: [
-        .executable(
-            name: "MyRSAApp",
-            targets: ["MyRSAApp"]
-        ),
-        .library(
-            name: "UtilityHelperLib",
-            targets: ["UtilityHelperLib"]
-        ),
+        .executable(name: "MyRSAApp", targets: ["MyRSAApp"]),
+        .library(name: "UtilityHelperLib", targets: ["UtilityHelperLib"]),
     ],
-    dependencies: [],
     targets: [
         .target(
             name: "UtilityHelperLib",
-            dependencies: [],
-            path: "Sources/UtilityHelperLib"
+            dependencies: []
         ),
-        .target(
+        .executableTarget(
             name: "MyRSAApp",
-            dependencies: ["UtilityHelperLib"],
-            path: "Sources/MyRSAApp"
+            dependencies: ["UtilityHelperLib"]
         ),
-        .testTarget(
-            name: "MyRSAAppTests",
-            dependencies: ["UtilityHelperLib"],
-            path: "Tests/MyRSAAppTests"
-        )
     ]
 )
