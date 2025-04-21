@@ -1,0 +1,64 @@
+import Foundation
+import Security
+
+struct RSAKeyValue: Codable {
+    var Modulus: String
+    var Exponent: String
+}
+
+class UtilityHelper {
+    private var privateKey: SecKey!
+    private var publicKey: SecKey!
+
+    init?() {
+        guard generateKeyPair() else {
+            return nil
+        }
+    }
+
+    private func generateKeyPair() -> Bool {
+        let attributes: [String: Any] = [
+            kSecAttrKeyType as String: kSecAttrKeyTypeRSA,
+            kSecAttrKeySizeInBits as String: 1024
+        ]
+
+        var pubKey: SecKey?
+        var privKey: SecKey?
+        let status = SecKeyGeneratePair(attributes as CFDictionary, &pubKey, &privKey)
+
+        guard status == errSecSuccess, let pub = pubKey, let priv = privKey else {
+            return false
+        }
+
+        self.publicKey = pub
+        self.privateKey = priv
+        return true
+    }
+
+    func getPublicKey() -> String? {
+        guard let publicKeyData = SecKeyCopyExternalRepresentation(publicKey!, nil) as Data? else {
+            return nil
+        }
+
+        let keyData = publicKeyData
+        let keyBytes = [UInt8](keyData)
+        let modulus = Data(keyBytes.suffix(from: 33)).base64EncodedString()
+        return modulus
+    }
+
+    func decryptWithRSA(_ base64String: String) -> Data? {
+        guard let encryptedData = Data(base64Encoded: base64String) else {
+            return nil
+        }
+
+        var error: Unmanaged<CFError>?
+        let decryptedData = SecKeyCreateDecryptedData(
+            privateKey!,
+            .rsaEncryptionPKCS1,
+            encryptedData as CFData,
+            &error
+        )
+
+        return decryptedData as Data?
+    }
+}
