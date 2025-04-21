@@ -12,7 +12,7 @@ public class UtilityHelper {
     private var publicKey: SecKey!
     
     // Initialize and generate the RSA key pair
-    init?() {
+   public init?() {
         guard generateKeyPair() else {
             return nil
         }
