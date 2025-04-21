@@ -17,5 +17,9 @@ let package = Package(
             name: "MyRSAApp",
             dependencies: ["UtilityHelperLib"]
         ),
+        .testTarget(
+            name: "UtilityHelperLibTests",
+            dependencies: ["UtilityHelperLib"]
+        ),
     ]
 )
