@@ -8,18 +8,27 @@ let package = Package(
             name: "MyRSAApp",
             targets: ["MyRSAApp"]
         ),
+        .library(
+            name: "UtilityHelperLib",
+            targets: ["UtilityHelperLib"]
+        ),
     ],
     dependencies: [],
     targets: [
         .target(
             name: "MyRSAApp",
-            dependencies: [],
+            dependencies: ["UtilityHelperLib"], // Use the library here
             path: "Sources/MyRSAApp"
+        ),
+        .target(  // New target for UtilityHelper
+            name: "UtilityHelperLib",
+            dependencies: [],
+            path: "Sources/UtilityHelperLib"  // Place the UtilityHelper code here
         ),
         .testTarget(
             name: "MyRSAAppTests",
-            dependencies: ["MyRSAApp"],
+            dependencies: ["MyRSAApp", "UtilityHelperLib"],  // Test depends on both
             path: "Tests"
-        ),
+        )
     ]
 )
