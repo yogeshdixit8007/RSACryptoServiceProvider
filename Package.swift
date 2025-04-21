@@ -16,19 +16,19 @@ let package = Package(
     dependencies: [],
     targets: [
         .target(
-            name: "MyRSAApp",
-            dependencies: ["UtilityHelperLib"], // Use the library here
-            path: "Sources/MyRSAApp"
-        ),
-        .target(  // New target for UtilityHelper
             name: "UtilityHelperLib",
             dependencies: [],
-            path: "Sources/UtilityHelperLib"  // Place the UtilityHelper code here
+            path: "Sources/UtilityHelperLib"
+        ),
+        .target(
+            name: "MyRSAApp",
+            dependencies: ["UtilityHelperLib"],
+            path: "Sources/MyRSAApp"
         ),
         .testTarget(
             name: "MyRSAAppTests",
-            dependencies: ["MyRSAApp", "UtilityHelperLib"],  // Test depends on both
-            path: "Tests"
+            dependencies: ["UtilityHelperLib"],
+            path: "Tests/MyRSAAppTests"
         )
     ]
 )
