@@ -1,9 +1,5 @@
-
-
-import Foundation
+import UtilityHelperLib
 
 let helper = UtilityHelper()
-
-if let publicKey = helper?.getPublicKey() {
-    print("Public Key Modulus: \(publicKey)")
-}
+let publicKey = helper.generateKey()
+print("Public Key: \(publicKey)")
