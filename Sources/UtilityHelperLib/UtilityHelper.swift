@@ -7,7 +7,7 @@ struct RSAKeyValue: Codable {
     var Modulus: String
 }
 
-class UtilityHelper {
+public class UtilityHelper {
     private var privateKey: SecKey!
     private var publicKey: SecKey!
     
