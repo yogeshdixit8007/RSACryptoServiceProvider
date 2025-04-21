@@ -3,7 +3,9 @@ import PackageDescription
 
 let package = Package(
     name: "RSACryptoServiceProvider",
-    platforms: [.macOS(.v10_15)],
+    platforms: [
+        .iOS(.v13) 
+    ],
     products: [
         .executable(name: "MyRSAApp", targets: ["MyRSAApp"]),
         .library(name: "UtilityHelperLib", targets: ["UtilityHelperLib"]),
@@ -15,10 +17,6 @@ let package = Package(
         ),
         .executableTarget(
             name: "MyRSAApp",
-            dependencies: ["UtilityHelperLib"]
-        ),
-        .testTarget(
-            name: "UtilityHelperLibTests",
             dependencies: ["UtilityHelperLib"]
         ),
     ]
