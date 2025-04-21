@@ -39,7 +39,7 @@ public class UtilityHelper {
     }
 
     // Export public key as Modulus in base64 format (without Exponent)
-    func getPublicKey() -> String? {
+   public func getPublicKey() -> String? {
         // Get the external representation of the public key
         guard let publicKeyData = SecKeyCopyExternalRepresentation(publicKey!, nil) as Data? else {
             return nil
@@ -55,7 +55,7 @@ public class UtilityHelper {
     }
 
     // Decrypt the base64-encoded encrypted data using the private key
-    func decryptWithRSA(base64String: String) -> Data? {
+   public func decryptWithRSA(base64String: String) -> Data? {
         // Convert base64 encrypted data string to Data
         guard let encryptedData = Data(base64Encoded: base64String) else {
             return nil
